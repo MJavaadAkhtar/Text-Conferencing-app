@@ -24,7 +24,18 @@ Make sure you have __gcc__ installed in your terminal. Open two terminals, one f
 - go to __app__ directory
 - run the following command:
 `./server <TCP port_number>`
- Now your server is up and running. Time to connect clients.
+ Now your server is up and running. Here is an example below:
+ 
+ ```sh
+mohammadjavaadakhtar:~/Documents/Text-Conferencing-app/app> ./server 50000
+Server Log: Database of Users are loaded in the system
+file descriptor 3 received
+
+Successfully binded!
+Welcome~
+ ```
+ 
+ Time to connect clients. 
  
  #### Client Terminal
  - go to __app__ directory
@@ -46,3 +57,56 @@ Make sure you have __gcc__ installed in your terminal. Open two terminals, one f
 |`/ls`| Similar to bash command `ls`. |
 |`/changesess`| Change a your session. |
 |`/ftp`| In order to do a File Transfer using my own implementation of FTP. |
+
+Here is an example:
+
+This is client 1 (name _a_):
+```properties
+mohammadjavaadakhtar:~/Documents/Text-Conferencing-app/app:~/app$ ./client
+/login a b 127.0.0.1 50000
+client ID: a 
+password: b 
+server IP: 127.0.0.1 
+server Port: 50000 
+Client Log: connecting with 127.0.0.1
+port:50005
+Client Log: login successful.
+/createsession scrumMeeting
+Successfully created and joined session 1.
+javaad: Hi this is javaad
+Hi this is a
+a: Hi this is a
+```
+
+This is client 2 (name _javaad_):
+```properties
+mohammadjavaadakhtar:~/Documents/Text-Conferencing-app/app:~/app$ ./client
+/login javaad 1234 127.0.0.1 50000
+client ID: javaad 
+password: 1234 
+server IP: 127.0.0.1 
+server Port: 50000 
+Client Log: connecting with 127.0.0.1
+port:50002
+Client Log: login successful.
+
+/list
+User_name		Session_id		Session_name
+javaad
+a			1		scrumMeeting
+
+/joinsession scrumMeeting
+Successfully joined session scrumMeeting.
+
+Hi this is javaad
+javaad: Hi this is javaad
+a: Hi this is a
+/list
+User_name		Session_id		Session_name
+javaad			2		scrumMeeting
+a			1		scrumMeeting
+/ls
+client	    deliver_ftp.c  packet_ftp.h  server.c      temp_file.txt
+client.c    Makefile	   packet.h	 server_ftp    testing.c
+client_ftp  message.h	   server	 server_ftp.c  user_db.txt
+```
